@@ -1,4 +1,8 @@
-import UIKit
+import Foundation
 
-var str = "Hello, playground"
-print(str)
+let passwords: [String]
+
+private func validatePassword(with password: [String]) -> String {
+    
+    return "password"
+}
