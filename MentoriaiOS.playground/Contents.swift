@@ -1,5 +1,4 @@
 import Foundation
-import UIKit
 
 /*
  no mínimo 7 caracteres - ok
