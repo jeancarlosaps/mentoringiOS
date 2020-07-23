@@ -12,6 +12,15 @@ import Foundation
  verificar se tem letra maiúscula nesta palavra
 */
 
+private class PasswordValidation {
+    
+    func validate(passwords: [String]) -> [String] {
+        
+        
+        return [""]
+    }
+}
+
 // MARK: - Properties
 
 var passwordsToValidate = ["#forTe1", "senhafraca", "Qu@s1", "Voce@Consegue!2019"]
