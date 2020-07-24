@@ -12,55 +12,66 @@ import Foundation
  verificar se tem letra maiúscula nesta palavra
 */
 
-private class PasswordValidation {
+
+class PasswordValidation {
+    
+    // MARK: - Public Methods
     
     func validate(passwords: [String]) -> [String] {
         
+        var filtersValidePasswords = passwords
         
-        return [""]
+        filterMinimumSevenCharacters(passwords: &filtersValidePasswords)
+        filterAtLeastOneUpperCaseCharacters(passwords: &filtersValidePasswords)
+        filterAtLeastOneLowerCaseCharacters(passwords: &filtersValidePasswords)
+        
+        return filtersValidePasswords
+    }
+    
+    // MARK: - Private Methods
+    
+    private func filterMinimumSevenCharacters(passwords: inout [String]) {
+        passwords = passwords.filter { $0.count >= 7 }
+    }
+    
+    private func filterAtLeastOneUpperCaseCharacters(passwords: inout [String]) {
+        
+        var passwordsFiltered = [String]()
+        
+        for password in passwords {
+            for character in password {
+                if character.isUppercase {
+                    passwordsFiltered.append(password)
+                    break
+                }
+            }
+        }
+        
+        passwords = passwordsFiltered
+    }
+    
+    private func filterAtLeastOneLowerCaseCharacters(passwords: inout [String]) {
+        
+        var passwordsFiltered = [String]()
+        
+        for password in passwords {
+            for character in password {
+                if character.isLowercase {
+                    passwordsFiltered.append(password)
+                    break
+                }
+            }
+        }
+        
+        passwords = passwordsFiltered
     }
 }
 
 // MARK: - Properties
 
-var passwordsToValidate = ["#forTe1", "senhafraca", "Qu@s1", "Voce@Consegue!2019"]
-var newPasswordsMaiscule = [String]()
-var newPasswordsMinuscule = [String]()
+var inputPasswords = ["#forTe1", "senhafraca", "Qu@s1", "Voce@Consegue!2019"]
 
-// MARK: - Methods
+let passWordValidation = PasswordValidation()
 
-private func validatePassword(with password: [String]) -> [String] {
-    
-    return passwordsToValidate.filter { $0.count >= 7 }
-}
-
-validatePassword(with: passwordsToValidate)
-
-// Valida se tem pelo menos uma letra maiúscula.
-for password in passwordsToValidate {
-    for character in password {
-        if character.isUppercase {
-            newPasswordsMaiscule.append(password)
-            break
-        }
-    }
-}
-
-// Valida se possui pelo menos uma letra minúscula.
-for password in passwordsToValidate {
-    for character in password {
-        if character.isLowercase {
-            newPasswordsMinuscule.append(password)
-            break
-        }
-    }
-}
-
-print("Resultados:")
-print(newPasswordsMaiscule)
-
-print("Resultados:")
-print(newPasswordsMinuscule)
-
-
-
+print("Resultado: \n")
+print(passWordValidation.validate(passwords: inputPasswords))
