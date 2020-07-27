@@ -1,5 +1,3 @@
-import Foundation
-
 /*
  no mínimo 7 caracteres - ok
  pelo menos uma letra maiúscula - ok
@@ -11,7 +9,6 @@ import Foundation
  pegar uma palavra
  verificar se tem letra maiúscula nesta palavra
 */
-
 
 class PasswordValidation {
     
