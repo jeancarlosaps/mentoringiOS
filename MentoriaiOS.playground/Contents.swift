@@ -12,7 +12,13 @@ import Foundation
  verificar se tem letra maiúscula nesta palavra
 */
 
+// MARK: - Properties
+
 var passwordsToValidate = ["#forTe1", "senhafraca", "Qu@s1", "Voce@Consegue!2019"]
+var newPasswordsMaiscule = [String]()
+var newPasswordsMinuscule = [String]()
+
+// MARK: - Methods
 
 private func validatePassword(with password: [String]) -> [String] {
     
@@ -21,17 +27,31 @@ private func validatePassword(with password: [String]) -> [String] {
 
 validatePassword(with: passwordsToValidate)
 
-//
-var newPasswords = [String]()
-
+// Valida se tem pelo menos uma letra maiúscula.
 for password in passwordsToValidate {
     for character in password {
         if character.isUppercase {
-            newPasswords.append(password)
+            newPasswordsMaiscule.append(password)
             break
         }
     }
 }
 
-print("Resultados")
-print(newPasswords)
+// Valida se possui pelo menos uma letra minúscula.
+for password in passwordsToValidate {
+    for character in password {
+        if character.isLowercase {
+            newPasswordsMinuscule.append(password)
+            break
+        }
+    }
+}
+
+print("Resultados:")
+print(newPasswordsMaiscule)
+
+print("Resultados:")
+print(newPasswordsMinuscule)
+
+
+
