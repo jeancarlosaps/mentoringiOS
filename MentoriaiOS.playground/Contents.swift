@@ -10,55 +10,65 @@
  verificar se tem letra maiúscula nesta palavra
 */
 
+class PasswordValidation {
+    
+    // MARK: - Public Methods
+    
+    func validate(passwords: [String]) -> [String] {
+        
+        var filtersValidePasswords = passwords
+        
+        filterMinimumSevenCharacters(passwords: &filtersValidePasswords)
+        filterAtLeastOneUpperCaseCharacters(passwords: &filtersValidePasswords)
+        filterAtLeastOneLowerCaseCharacters(passwords: &filtersValidePasswords)
+        
+        return filtersValidePasswords
+    }
+    
+    // MARK: - Private Methods
+    
+    private func filterMinimumSevenCharacters(passwords: inout [String]){
+        passwords = passwords.filter { $0.count >= 7 }
+    }
+    
+    private func filterAtLeastOneUpperCaseCharacters(passwords: inout [String]) {
+        
+        var passwordsFiltered = [String]()
+        
+        for password in passwords {
+            for character in password {
+                if character.isUppercase {
+                    passwordsFiltered.append(password)
+                    break
+                }
+            }
+        }
+        
+        passwords = passwordsFiltered
+    }
+    
+    private func filterAtLeastOneLowerCaseCharacters(passwords: inout [String]) {
+        
+        var passwordsFiltered = [String]()
+        
+        for password in passwords {
+            for character in password {
+                if character.isLowercase {
+                    passwordsFiltered.append(password)
+                    break
+                }
+            }
+        }
+        
+        passwords = passwordsFiltered
+    }
+}
+
 // MARK: - Properties
 
-print("Quero conflitos 😈")
+var inputPasswords = ["#forTe1", "senhafraca", "Qu@s1", "Voce@Consegue!2019"]
 
-var passwordsToValidate = ["#forTe1", "senhafraca", "Qu@s1", "Voce@Consegue!2019"]
-var newPasswordsMaiscule = [String]()
-// o que é Maiscule?
-var newPasswordsMinuscule = [String]()
+let passWordValidation = PasswordValidation()
 
-// MARK: - Methods
-
-private func validatePassword(with password: [String]) -> [String] {
-    // aqui percorre a lista inteira
-    return passwordsToValidate.filter { $0.count >= 7 }
-}
-
-validatePassword(with: passwordsToValidate)
-
-// Valida se possui pelo menos uma letra minúscula.
-for password in passwordsToValidate {
-    // aqui percorre a lista inteira
-    for character in password {
-        if character.isLowercase {
-            newPasswordsMinuscule.append(password)
-            break
-        }
-    }
-}
-
-
-// Valida se tem pelo menos uma letra maiúscula.
-// só pra dar conflito mesmo =) 
-for password in passwordsToValidate {
-    // aqui percorre a lista inteira
-    for character in password {
-        if character.isUppercase {
-            // https://www.google.com/search?q=Maiscule
-            newPasswordsMaiscule.append(password)
-            break
-        }
-    }
-}
-
-
-print("Resultados:")
-print(newPasswordsMaiscule)
-
-print("Resultados:")
-print(newPasswordsMinuscule)
-
-
-
+print("Resultado: \n")
+print(passWordValidation.validate(passwords: inputPasswords))
