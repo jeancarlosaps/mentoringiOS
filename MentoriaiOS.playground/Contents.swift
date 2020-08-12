@@ -18,22 +18,20 @@ class PasswordValidation {
         
         var filtersValidePasswords = passwords
         
-        filtersValidePasswords = filterMinimumSevenCharacters(with: filtersValidePasswords)
-        filtersValidePasswords = filterAtLeastOneUpperCaseCharacters(with: filtersValidePasswords)
-        filtersValidePasswords = filterAtLeastOneLowerCaseCharacters(with: filtersValidePasswords)
+        filterMinimumSevenCharacters(passwords: &filtersValidePasswords)
+        filterAtLeastOneUpperCaseCharacters(passwords: &filtersValidePasswords)
+        filterAtLeastOneLowerCaseCharacters(passwords: &filtersValidePasswords)
         
         return filtersValidePasswords
     }
     
     // MARK: - Private Methods
     
-    private func filterMinimumSevenCharacters(with passwords: [String]) -> [String] {
-        let passwords = passwords.filter { $0.count >= 7 }
-        
-        return passwords
+    private func filterMinimumSevenCharacters(passwords: inout [String]){
+        passwords = passwords.filter { $0.count >= 7 }
     }
     
-    private func filterAtLeastOneUpperCaseCharacters(with passwords: [String]) -> [String] {
+    private func filterAtLeastOneUpperCaseCharacters(passwords: inout [String]) {
         
         var passwordsFiltered = [String]()
         
@@ -46,10 +44,10 @@ class PasswordValidation {
             }
         }
         
-        return passwordsFiltered
+        passwords = passwordsFiltered
     }
     
-    private func filterAtLeastOneLowerCaseCharacters(with passwords: [String]) -> [String] {
+    private func filterAtLeastOneLowerCaseCharacters(passwords: inout [String]) {
         
         var passwordsFiltered = [String]()
         
@@ -62,7 +60,7 @@ class PasswordValidation {
             }
         }
         
-        return passwordsFiltered
+        passwords = passwordsFiltered
     }
 }
 
