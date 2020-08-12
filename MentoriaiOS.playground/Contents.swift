@@ -10,55 +10,67 @@
  verificar se tem letra maiúscula nesta palavra
 */
 
+class PasswordValidation {
+    
+    // MARK: - Public Methods
+    
+    func validate(passwords: [String]) -> [String] {
+        
+        var filtersValidePasswords = passwords
+        
+        filtersValidePasswords = filterMinimumSevenCharacters(with: filtersValidePasswords)
+        filtersValidePasswords = filterAtLeastOneUpperCaseCharacters(with: filtersValidePasswords)
+        filtersValidePasswords = filterAtLeastOneLowerCaseCharacters(with: filtersValidePasswords)
+        
+        return filtersValidePasswords
+    }
+    
+    // MARK: - Private Methods
+    
+    private func filterMinimumSevenCharacters(with passwords: [String]) -> [String] {
+        let passwords = passwords.filter { $0.count >= 7 }
+        
+        return passwords
+    }
+    
+    private func filterAtLeastOneUpperCaseCharacters(with passwords: [String]) -> [String]{
+        
+        var passwordsFiltered = [String]()
+        
+        for password in passwords {
+            for character in password {
+                if character.isUppercase {
+                    passwordsFiltered.append(password)
+                    break
+                }
+            }
+        }
+        
+        return passwordsFiltered
+    }
+    
+    private func filterAtLeastOneLowerCaseCharacters(with passwords: [String]) -> [String] {
+        
+        var passwordsFiltered = [String]()
+        
+        for password in passwords {
+            for character in password {
+                if character.isLowercase {
+                    passwordsFiltered.append(password)
+                    break
+                }
+            }
+        }
+        
+        return passwordsFiltered
+    }
+}
+
 // MARK: - Properties
 
-print("Quero conflitos 😈")
+var inputPasswords = ["#forTe1", "senhafraca", "Qu@s1", "Voce@Consegue!2019"]
 
-var passwordsToValidate = ["#forTe1", "senhafraca", "Qu@s1", "Voce@Consegue!2019"]
-var newPasswordsMaiscule = [String]()
-// o que é Maiscule?
-var newPasswordsMinuscule = [String]()
+let passWordValidation = PasswordValidation()
 
-// MARK: - Methods
-
-private func validatePassword(with password: [String]) -> [String] {
-    // aqui percorre a lista inteira
-    return passwordsToValidate.filter { $0.count >= 7 }
-}
-
-validatePassword(with: passwordsToValidate)
-
-// Valida se possui pelo menos uma letra minúscula.
-for password in passwordsToValidate {
-    // aqui percorre a lista inteira
-    for character in password {
-        if character.isLowercase {
-            newPasswordsMinuscule.append(password)
-            break
-        }
-    }
-}
-
-
-// Valida se tem pelo menos uma letra maiúscula.
-// só pra dar conflito mesmo =) 
-for password in passwordsToValidate {
-    // aqui percorre a lista inteira
-    for character in password {
-        if character.isUppercase {
-            // https://www.google.com/search?q=Maiscule
-            newPasswordsMaiscule.append(password)
-            break
-        }
-    }
-}
-
-
-print("Resultados:")
-print(newPasswordsMaiscule)
-
-print("Resultados:")
-print(newPasswordsMinuscule)
-
-
-
+print("Resultado: \n")
+print(passWordValidation.validate(passwords: inputPasswords))
